@@ -1,0 +1,34 @@
+.form-input {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-ctn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 90vh;
+    border: 1px solid red;
+    min-width: 325px;
+}
+
+.form-input-ctn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    >label {
+        text-align: left;
+        width: 100%;
+    }
+}
+
+.form-error-msg {
+    color: red;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}

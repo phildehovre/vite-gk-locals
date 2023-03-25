@@ -12,7 +12,7 @@ import { getStorage, ref } from "firebase/storage";
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-// Initialize Firebase
+// // Initialize Firebase
 const firebaseConfig = {
     apiKey: import.meta.env.VITE_REACT_APP_APIKEY,
     authDomain: import.meta.env.VITE_REACT_APP_AUTHDOMAIN,
@@ -23,15 +23,15 @@ const firebaseConfig = {
     measurementId: import.meta.env.VITE_REACT_APP_MEASUREMENTID
 };
 
-console.log(import.meta.env.VITE_REACT_APP_APIKEY)
+
+
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
-export default app
+export default getFirestore(app)
 export const auth = getAuth(app);
-export const db = getFirestore(app)
 export const rtdb = getDatabase(app)
 export const storage = getStorage(app)
 export const imagesRef = ref(storage, 'images')
