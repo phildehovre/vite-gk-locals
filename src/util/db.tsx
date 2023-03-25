@@ -42,3 +42,13 @@ export function useBusinesses() {
     );
 };
 
+
+
+export function QueryClientProvider(props: { children: React.ReactNode }) {
+    return (
+        <QueryClientProviderBase client={client}>
+            {props.children}
+        </QueryClientProviderBase>
+    );
+}
+
