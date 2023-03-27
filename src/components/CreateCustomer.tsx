@@ -8,12 +8,14 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import Spinner from './Spinner'
 import { useNavigate } from 'react-router'
 import './CreateCustomer.scss'
+import { setBusiness } from '../util/db'
 
 
 
 const schema = yup.object().shape({
     firstName: yup.string().required('A first name is required'),
     lastName: yup.string().required('A last name is required'),
+    email: yup.string().email().required('A last name is required'),
     businessName: yup.string().required('A business name is required'),
     role: yup.string().required('A role is required'),
 })
@@ -23,34 +25,29 @@ const schema = yup.object().shape({
 function CreateCustomer() {
 
 
-    const { register, handleSubmit, formState: { errors } } = useForm({ resolver: yupResolver(schema) })
+    const { register, handleSubmit, formState: { errors }, reset } = useForm({ resolver: yupResolver(schema) })
 
 
     const navigate = useNavigate()
+    const queryClient = useQueryClient()
 
 
-    // const addCustomer = useMutation({
-    //     mutationFn: async (event: any) => {
-    //         console.log('')
-    //     });
+    const addBusiness = useMutation({
+        mutationFn: (business: any) => setBusiness(business),
+        onSuccess: () => {
+            queryClient.invalidateQueries(['businesses'])
+        },
+    });
+
+
 
     const onSubmit = (data: any) => {
-        console.log(data)
-        // const { name, description, span, permissions } = data
-        // const event = {
-        //     'name': name,
-        //     'description': description,
-        //     'span': span,
-        //     'permissions': permissions,
-        //     'template_id': uuidv4(),
-        //     'author_id': session?.user.id
-        // };
-        // addTemplate.mutateAsync(event).then((res) => {
-        //     if (res.data !== null) {
-        //         context?.setSelectedTemplateId(res.data[0].template_id)
-        //         navigate(`/dashboard/template/${res.data[0].template_id}`)
-        //     }
-        // }).catch(err => alert(err))
+        const business = {
+            ...data, 'businessId': uuidv4().toString().split('-').join(''),
+        }
+        addBusiness.mutateAsync(business).then((res) => {
+        }).catch(err => alert(err));
+        reset()
     };
 
     return (
@@ -61,7 +58,7 @@ function CreateCustomer() {
                 <div className='form-input-ctn'>
                     <label>First name:
                         {errors?.firstName &&
-                            <p className='form-error-msg'></p>
+                            <p className='form-error-msg'>Please enter a first name</p>
                         }
                     </label>
                     <input className='form-input'
@@ -69,7 +66,7 @@ function CreateCustomer() {
                         name='firstName'
                         type='text'
                         autoComplete='off'
-                        placeholder='first name'
+                        placeholder='First name...'
                     ></input>
                 </div>
                 <div className='form-input-ctn'>
@@ -81,7 +78,21 @@ function CreateCustomer() {
                     <input
                         {...register('lastName')}
                         name='lastName'
-                        type='text' placeholder='last name'
+                        type='text' placeholder='Last name...'
+                        autoComplete='off'
+                        className='form-input'>
+                    </input>
+                </div>
+                <div className='form-input-ctn'>
+                    <label>E-mail address:
+                        {errors?.email &&
+                            <p className='form-error-msg'>Please enter a valid e-mail</p>
+                        }
+                    </label>
+                    <input
+                        {...register('email')}
+                        name='email'
+                        type='text' placeholder='E-mail address...'
                         autoComplete='off'
                         className='form-input'>
                     </input>
@@ -98,7 +109,7 @@ function CreateCustomer() {
                         {...register('businessName')}
                         name='businessName'
                         autoComplete='off'
-                        type='text' placeholder='Business name'
+                        type='text' placeholder='Business name...'
                         className='form-input id'
                     ></input>
                 </div>
@@ -113,12 +124,12 @@ function CreateCustomer() {
                         name='role'
                         className='form-input'
                         type='text'
+                        placeholder='Role...'
                     >
                     </input>
                 </div>
                 <button type='submit'>
-                    {/* {addTemplate.isLoading ? <Spinner /> : 'Create template'} */}
-                    Submit
+                    {addBusiness.isLoading ? <Spinner /> : 'Add business'}
                 </button>
             </form>
         </div >

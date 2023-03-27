@@ -42,7 +42,13 @@ export function useBusinesses() {
     );
 };
 
+export async function setBusiness(business: any) {
+    return setDoc(doc(db, "businesses", business.businessId), business);
+}
 
+export function deleteBusiness(businessId: string) {
+    return deleteDoc(doc(db, "businesses", businessId));
+}
 
 export function QueryClientProvider(props: { children: React.ReactNode }) {
     return (

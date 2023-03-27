@@ -1,18 +1,29 @@
 import React from 'react';
 import { useAuthState, useSendEmailVerification } from 'react-firebase-hooks/auth';
 import app, { auth, provider } from '../config/firebase';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { getAuth, signInWithPopup } from 'firebase/auth';
 
 const Login = () => {
 
 
   const auth = getAuth()
+  const navigate = useNavigate()
 
   console.log(auth.currentUser)
 
   const handleSignInWithGoogle = async () => {
-    const res = await signInWithPopup(auth, provider)
+    try {
+      const res = await signInWithPopup(auth, provider)
+
+    }
+    catch (err) {
+      alert(err)
+    }
+
+    finally {
+      navigate('/')
+    }
   };
 
 

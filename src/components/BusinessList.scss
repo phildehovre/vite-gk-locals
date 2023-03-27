@@ -1,0 +1,63 @@
+.business_list-ctn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 90vh;
+    width: 100%;
+}
+
+.business-ctn {
+    display: flex;
+    flex-direction: row;
+    align-items: space-around;
+    justify-content: center;
+    margin-bottom: 1em;
+    border-radius: 6px;
+    border: 1px solid #7979796e;
+    width: 100%;
+    height: 4em;
+    padding: .4em;
+
+    .business_column {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+
+        >h4 {
+            margin: 0;
+            font-size: smaller;
+
+        }
+
+        >p {
+            margin: 0;
+            font-size: smaller;
+        }
+
+        &.small {
+            width: 5%;
+            display: flex;
+            justify-content: center;
+            text-align: center;
+            align-items: center;
+
+        }
+    }
+
+    .right {
+        justify-content: center;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+
+        width: 100%;
+
+        >* {
+            margin: 0
+        }
+    }
+}

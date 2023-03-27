@@ -12,7 +12,6 @@ interface Props {
 const DropdownMenu: React.FC<Props> = ({ options,
     onSelect, children }) => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
-    // const [defaultOption, setDefaultOption] = useState<String>('About');
     const dropdownRef = useRef<HTMLDivElement>(null);
 
     const handleClickOutside = (event: MouseEvent) => {
@@ -38,7 +37,7 @@ const DropdownMenu: React.FC<Props> = ({ options,
     return (
         <div className="dropdown" ref={dropdownRef} >
             <div className="dropdown-toggle"
-                style={{ backgroundImage: `url(${auth?.currentUser?.photoURL})` }}
+                // style={{ backgroundImage: `url(${auth?.currentUser?.photoURL})` }}
                 onClick={() => setIsOpen(!isOpen)}>
                 {children}
             </div>
@@ -48,12 +47,12 @@ const DropdownMenu: React.FC<Props> = ({ options,
                         if (option === 'sign out') {
                             return (
                                 <React.Fragment key='sign out'>
-                                    'SIGN OUT'
+                                    Sign out
                                 </React.Fragment>
                             )
                         }
                         return (
-                            < li key={option} onClick={() => handleOptionClick(option)}>
+                            < li key={option} className={`dropdown-option ${option === 'Delete' ? 'delete' : ''} `} onClick={() => handleOptionClick(option)}>
                                 {option}
                             </li>
                         )

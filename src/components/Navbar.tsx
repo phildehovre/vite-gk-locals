@@ -23,10 +23,10 @@ const Navbar = () => {
             <div className="navbar-buttons">
                 <button className="navbar-button">Home</button>
                 {auth.currentUser
-                    ? <DropdownMenu options={['About', 'Settings', 'Profile', 'sign out']} onSelect={() => { console.log('clicked') }}>
-                        <div className='user-icon' style={{ backgroundImage: `url(${auth?.currentUser?.photoURL})` }}>
-                        </div>
-                    </DropdownMenu>
+                    ? <div className='user-icon' style={{ backgroundImage: `url(${auth?.currentUser?.photoURL})` }}>
+                        <DropdownMenu options={['About', 'Settings', 'Profile', 'sign out']} onSelect={() => { console.log('clicked') }}>
+                        </DropdownMenu>
+                    </div>
                     : <LoginWithGoogle />
                 }
             </div>
