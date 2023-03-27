@@ -8,18 +8,19 @@ import './BusinessList.scss'
 import DropdownMenu from './Dropdown';
 
 function BusinessList(props: {
-    sizeProp?: SizeProp | undefined
+    sizeProp?: SizeProp | undefined,
+    businesses: any[]
 }) {
 
     const [isOpen, setIsOpen] = React.useState(false);
-    const { sizeProp } = props
+    const { sizeProp, businesses } = props
 
     const { data, isLoading, error } = useBusinesses();
 
 
     const renderBusinessList = () => {
         return (
-            data?.map((business: any) => (
+            businesses?.map((business: any) => (
                 <div key={business.businessId} className='business-ctn'>
                     <span className='business_column left'>
                         <h4>{business.lastName} {business.firstName}</h4>

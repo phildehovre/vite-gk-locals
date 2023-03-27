@@ -2,11 +2,13 @@ import React, { SetStateAction, useContext, useEffect, useState } from "react";
 import './SearchBar.scss'
 import SearchFilters from "./SearchFilters";
 import { SearchContext } from "../contexts/SearchContext";
+import { v4 as uuid } from 'uuid';
+import BusinessList from "./BusinessList";
 
 function SearchBar(props: { data?: any[] }) {
     const [query, setQuery] = useState("");
     const [dataAfterFilters, setDataAfterFilters] = useState<SetStateAction<Business[]>>([]);
-    const regex = new RegExp(query, "i");
+    const regex = new RegExp(`.*${query}.*`, "gi");
     const { selectedFilter } = useContext(SearchContext)
 
     interface Business {
@@ -24,18 +26,22 @@ function SearchBar(props: { data?: any[] }) {
         }
         if (selectedFilter === 'name' && query.length > 0) {
             let firstNames = props.data?.filter((item: any) => regex.test(item.firstName))
-            let lastNames = props.data?.filter((item: any) => regex.test(item.lastName) && !firstNames?.includes(item))
-            setDataAfterFilters([...firstNames, ...lastNames])
+            let lastNames = props.data?.filter((item: any) => regex.test(item.lastName))
+            console.log(lastNames, firstNames)
+            setDataAfterFilters((prevData: any) => { return [...(firstNames || []), ...(lastNames || [])] })
         }
-        if (selectedFilter === 'business' && query.length > 0) {
+        if (selectedFilter === 'businessName' && query.length > 0) {
             let businessNames = props.data?.filter((item: any) => regex.test(item.businessName))
-            setDataAfterFilters(businessNames)
+            setDataAfterFilters((prevData: any) => { return businessNames || [] })
+        }
+        if (selectedFilter === 'email' && query.length > 0) {
+            let emailAddresses = props.data?.filter((item: any) => regex.test(item.email))
+            setDataAfterFilters((prevData: any) => { return emailAddresses || [] })
         }
 
     }, [query, selectedFilter])
 
 
-    console.log('after filters ', dataAfterFilters)
 
     return (
         <div className='searchbar-ctn'>
@@ -45,13 +51,10 @@ function SearchBar(props: { data?: any[] }) {
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Search..."
+                className='searchbar-input'
             />
             {dataAfterFilters && dataAfterFilters.length > 0 && (
-                <ul>
-                    {dataAfterFilters?.map((item) => (
-                        <li key={item}>{item.lastName} {item.firstName}</li>
-                    ))}
-                </ul>
+                <BusinessList businesses={dataAfterFilters} />
             )}
         </div>
     );

@@ -16,7 +16,7 @@ export const SearchContext = createContext<SearchContextType>({
 
 
 const SearchProvider: React.FC<SearchProviderProps> = ({ children }) => {
-    const [selectedFilter, setSelectedFilter] = useState<string | undefined>(undefined);
+    const [selectedFilter, setSelectedFilter] = useState<string | undefined>('name');
 
     console.log(selectedFilter)
 

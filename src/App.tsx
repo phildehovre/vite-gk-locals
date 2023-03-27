@@ -6,6 +6,7 @@ import LoginWithGoogle from './components/LoginWithGoogle'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import HomePage from './Pages/HomePage'
 import Navbar from './components/Navbar'
+import CreateCustomer from './components/CreateCustomer'
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/new/business" element={<CreateCustomer />} />
         </Routes>
       </Router>
     </div>

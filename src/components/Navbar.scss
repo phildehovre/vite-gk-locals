@@ -1,11 +1,10 @@
 .navbar {
-    z-index: -1;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 1rem;
     background-color: transparent;
-    position: fixed;
+    position: absolute;
     min-width: 750px;
     width: 75%;
     top: 0;
@@ -21,6 +20,31 @@
 .navbar-buttons {
     display: flex;
     align-items: center;
+
+    >button {
+        position: relative;
+
+        &:hover {
+            background-color: transparent;
+
+        }
+
+        &::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -3px;
+            height: 2em;
+            width: 100%;
+            z-index: 10;
+        }
+
+        &::before:hover {
+            border: 1px solid white;
+            background-color: transparent;
+            border-radius: 0px;
+        }
+    }
 }
 
 .navbar-button {

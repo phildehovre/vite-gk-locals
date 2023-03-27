@@ -16,13 +16,11 @@ function HomePage() {
 
 
     return (
-        <Section flexDirection='column' centered={true} height='50vh'>
-            <SearchProvider>
+        <Section flexDirection='column' margin='10en 0 0  0' height='100vh'>
+            < SearchProvider >
                 <SearchBar data={data} />
-                <BusinessList />
-            </SearchProvider>
-            {/* <CreateCustomer /> */}
-        </Section>
+            </SearchProvider >
+        </Section >
     )
 }
 

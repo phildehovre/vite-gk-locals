@@ -7,17 +7,19 @@ function Section(props: {
     display?: string
     height?: string
     bkg?: string
-    centered?: boolean
+    centered?: boolean,
+    margin?: string
 
 }) {
 
-    const { flexDirection, display, height, bkg, centered } = props
+    const { flexDirection, display, height, bkg, centered, margin } = props
 
     const styles: object = {
         flexDirection: flexDirection,
         display: display,
         height: height,
         backgroundColor: `var(${bkg}`,
+        margin: margin
     }
 
 

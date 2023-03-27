@@ -4,7 +4,7 @@ import { SearchContext } from '../contexts/SearchContext'
 
 function SearchFilters() {
 
-    const { setSelectedFilter } = useContext(SearchContext)
+    const { selectedFilter, setSelectedFilter } = useContext(SearchContext)
 
     const handleFilterClick = (filterName: string) => {
         setSelectedFilter(filterName)
@@ -12,9 +12,9 @@ function SearchFilters() {
 
     return (
         <div className='search_filters-ctn'>
-            <button onClick={() => { handleFilterClick('name') }}>Name</button>
-            <button onClick={() => { setSelectedFilter('businessName') }}>Business</button>
-            <button onClick={() => { setSelectedFilter('email') }}>E-mail Address</button>
+            <button onClick={() => { handleFilterClick('name') }} className={`search_filters-btn ${selectedFilter === 'name' ? 'selected' : ''}`}>Name</button>
+            <button onClick={() => { setSelectedFilter('businessName') }} className={`search_filters-btn ${selectedFilter === 'businessName' ? 'selected' : ''}`}>Business</button>
+            <button onClick={() => { setSelectedFilter('email') }} className={`search_filters-btn ${selectedFilter === 'email' ? 'selected' : ''}`}>E-mail Address</button>
         </div>
     )
 }
