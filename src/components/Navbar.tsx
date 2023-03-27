@@ -23,8 +23,8 @@ const Navbar = () => {
                 <h2>ToGoos</h2>
             </div>
             <div className="navbar-buttons">
-                <button className='navbar-btn' onClick={() => navigate('/')} className="navbar-button">Home</button>
-                <button className='navbar-btn' onClick={() => navigate(' /new/business')} className="navbar-button">New business</button>
+                <button onClick={() => navigate('/')} className="navbar-button">Home</button>
+                <button onClick={() => navigate('/new/business')} className="navbar-button">New business</button>
                 {auth.currentUser
                     ? <div className='user-icon' style={{ backgroundImage: `url(${auth?.currentUser?.photoURL})` }}>
                         <DropdownMenu options={['About', 'Settings', 'Profile', 'sign out']} onSelect={() => { console.log('clicked') }}>
@@ -33,7 +33,7 @@ const Navbar = () => {
                     : <LoginWithGoogle />
                 }
             </div>
-        </nav >
+        </nav>
     );
 };
 

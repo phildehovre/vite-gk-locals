@@ -21,30 +21,6 @@
     display: flex;
     align-items: center;
 
-    >button {
-        position: relative;
-
-        &:hover {
-            background-color: transparent;
-
-        }
-
-        &::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: -3px;
-            height: 2em;
-            width: 100%;
-            z-index: 10;
-        }
-
-        &::before:hover {
-            border: 1px solid white;
-            background-color: transparent;
-            border-radius: 0px;
-        }
-    }
 }
 
 .navbar-button {
@@ -56,7 +32,7 @@
     cursor: pointer;
 
     &:hover {
-        background-color: #f5f5f5;
+        background-color: #f5f5f54d;
     }
 }
 
