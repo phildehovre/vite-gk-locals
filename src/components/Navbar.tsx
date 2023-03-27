@@ -20,7 +20,7 @@ const Navbar = () => {
     return (
         <nav className="navbar">
             <div className="navbar-logo">
-                <h2>ToGoos</h2>
+                <h2>GK-Locals</h2>
             </div>
             <div className="navbar-buttons">
                 <button onClick={() => navigate('/')} className="navbar-button">Home</button>
