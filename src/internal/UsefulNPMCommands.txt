@@ -1,0 +1,3 @@
+Pre Firebase Deployment ESLing formatter:
+
+ npx eslint . --fix

@@ -5,10 +5,14 @@ import * as SibApiV3Sdk from "sib-api-v3-sdk";
 import {config} from "dotenv";
 import * as cors from "cors";
 
+
 config();
 
 const app = express();
 admin.initializeApp();
+
+// Start writing functions
+// https://firebase.google.com/docs/functions/typescript
 
 const defaultClient = SibApiV3Sdk.ApiClient.instance;
 const apiKey = defaultClient.authentications["api-key"];
@@ -25,15 +29,20 @@ const sendinblue = (sendSmtpEmail: any) => {
     function(error: any) {
       console.log(error);
       return false;
-    }
-  );
+    });
 };
 
-app.use(cors({origin: true}));
+
+export const helloWorld = functions.https.onRequest((request, response) => {
+  functions.logger.info("Hello logs!", {structuredData: true});
+  response.send("Hello from Firebase!");
+});
 
 app.post("/sendMail", async (req, res) => {
   const sendSmtpEmail = {
-    to: [{email: req.body.recipientMail}],
+    to: [
+      {email: req.body.recipientMail},
+    ],
     templateId: req.body.templateId,
     params: req.body.templateParams,
   };
@@ -42,9 +51,6 @@ app.post("/sendMail", async (req, res) => {
   res.status(200).send({mailSent: "success"});
 });
 
-app.get("/helloWorld", (request, response) => {
-  functions.logger.info("Hello logs!", {structuredData: true});
-  response.send("Hello from Firebase!");
-});
 
 exports.api = functions.https.onRequest(app);
+
