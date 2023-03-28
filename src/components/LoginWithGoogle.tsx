@@ -10,8 +10,6 @@ const Login = () => {
   const auth = getAuth()
   const navigate = useNavigate()
 
-  console.log(auth.currentUser)
-
   const handleSignInWithGoogle = async () => {
     try {
       const res = await signInWithPopup(auth, provider)

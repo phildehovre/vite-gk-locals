@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './Dropdown.scss'
-import { getAuth } from 'firebase/auth';
+import { getAuth, signOut } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';
+import { SignOutHook, useSignOut } from 'react-firebase-hooks/auth';
 
 interface Props {
     options: string[];
@@ -21,6 +23,8 @@ const DropdownMenu: React.FC<Props> = ({ options,
     };
 
     const auth = getAuth()
+    const [signOut, isLoading, error] = useSignOut(auth)
+    const navigate = useNavigate()
 
     useEffect(() => {
         document.addEventListener('mousedown', handleClickOutside);
@@ -34,6 +38,12 @@ const DropdownMenu: React.FC<Props> = ({ options,
         onSelect(option);
     };
 
+    const handleSignOut = () => {
+        signOut()
+            .then(() => navigate('/'))
+            .catch((error) => console.log('Error signing out:', error));
+    }
+
     return (
         <div className="dropdown" ref={dropdownRef} >
             <div className="dropdown-toggle"
@@ -44,11 +54,11 @@ const DropdownMenu: React.FC<Props> = ({ options,
             {isOpen && (
                 <ul className="dropdown-menu">
                     {options.map((option) => {
-                        if (option === 'sign out') {
+                        if (option === 'Sign out') {
                             return (
-                                <React.Fragment key='sign out'>
+                                <li key='sign out' onClick={() => handleSignOut()}>
                                     Sign out
-                                </React.Fragment>
+                                </li>
                             )
                         }
                         return (

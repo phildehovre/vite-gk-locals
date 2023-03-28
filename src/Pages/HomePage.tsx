@@ -8,8 +8,6 @@ import SearchBar from '../components/SearchBar';
 import SearchProvider from '../contexts/SearchContext';
 import { getAuth } from 'firebase/auth';
 import { useAuthState } from 'react-firebase-hooks/auth'
-import SendEmailsButton from '../components/SendEmailTestButton';
-import EmailSender from '../components/EmailSender';
 
 
 function HomePage() {
@@ -21,14 +19,12 @@ function HomePage() {
 
     const [user, loading, errors] = useAuthState(auth);
 
-    console.log(user)
     return (<>
         {user &&
             <Section flexDirection='column' margin='10en 0 0  0' height='100vh'>
                 < SearchProvider >
                     <SearchBar data={data} />
                 </SearchProvider >
-                <EmailSender />
             </Section >
         }
     </>

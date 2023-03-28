@@ -54,7 +54,6 @@ function SearchBar(props: { data?: any[] }) {
                 placeholder="Search..."
                 className='searchbar-input'
             />
-            <SendEmailsButton />
             {dataAfterFilters && dataAfterFilters.length > 0 && (
                 <BusinessList businesses={dataAfterFilters} />
             )}

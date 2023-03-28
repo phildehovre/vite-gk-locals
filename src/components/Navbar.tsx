@@ -26,9 +26,10 @@ const Navbar = () => {
             <div className="navbar-buttons">
                 <button onClick={() => navigate('/')} className="navbar-button">Home</button>
                 <button onClick={() => navigate('/new/business')} className="navbar-button">New business</button>
+                <button onClick={() => navigate('/new/email')} className="navbar-button">New e-mail</button>
                 {user
                     ?
-                    <DropdownMenu options={['About', 'Settings', 'Profile', 'sign out']} onSelect={() => { console.log('clicked') }}>
+                    <DropdownMenu options={['About', 'Settings', 'Profile', 'Sign out']} onSelect={() => { console.log('clicked') }}>
                         <div className='user-icon' style={{ backgroundImage: `url(${auth?.currentUser?.photoURL})` }}>
                         </div>
                     </DropdownMenu>
