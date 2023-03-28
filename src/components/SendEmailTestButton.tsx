@@ -13,7 +13,7 @@ const SendEmailsButton = () => {
     const [user] = useAuthState(auth);
 
     const handleSendEmail = () => {
-        sendTransactionalMailAccepted('dehovre_ph@hotmail.com', user?.email, 'test', 'test')
+        sendTransactionalMailAccepted('ph.dehovre@gmail.com', user?.email, 'test', 'test')
     }
 
 

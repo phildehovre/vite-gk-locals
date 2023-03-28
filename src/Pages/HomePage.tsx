@@ -9,6 +9,7 @@ import SearchProvider from '../contexts/SearchContext';
 import { getAuth } from 'firebase/auth';
 import { useAuthState } from 'react-firebase-hooks/auth'
 import SendEmailsButton from '../components/SendEmailTestButton';
+import EmailSender from '../components/EmailSender';
 
 
 function HomePage() {
@@ -27,7 +28,7 @@ function HomePage() {
                 < SearchProvider >
                     <SearchBar data={data} />
                 </SearchProvider >
-                <SendEmailsButton />
+                <EmailSender />
             </Section >
         }
     </>
