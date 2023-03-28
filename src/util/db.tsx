@@ -35,10 +35,13 @@ export const getBusinesses = async () => {
 }
 
 
-export function useBusinesses() {
+export function useBusinesses(uid: string | undefined) {
     return useQuery(
         ['businesses'],
         () => getBusinesses(),
+        {
+            enabled: !!uid
+        }
     );
 };
 

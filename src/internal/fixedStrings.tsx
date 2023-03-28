@@ -1,0 +1,1 @@
+export const apiURL = 'https://us-central1-vite-gk-locals.cloudfunctions.net'

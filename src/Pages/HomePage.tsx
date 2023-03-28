@@ -6,21 +6,31 @@ import BusinessList from '../components/BusinessList';
 import Section from '../components/Section';
 import SearchBar from '../components/SearchBar';
 import SearchProvider from '../contexts/SearchContext';
+import { getAuth } from 'firebase/auth';
+import { useAuthState } from 'react-firebase-hooks/auth'
+import SendEmailsButton from '../components/SendEmailTestButton';
 
 
 function HomePage() {
 
 
 
-    const { data, isLoading, error } = useBusinesses();
+    const auth = getAuth()
+    const { data, isLoading, error } = useBusinesses(auth.currentUser?.uid);
 
+    const [user, loading, errors] = useAuthState(auth);
 
-    return (
-        <Section flexDirection='column' margin='10en 0 0  0' height='100vh'>
-            < SearchProvider >
-                <SearchBar data={data} />
-            </SearchProvider >
-        </Section >
+    console.log(user)
+    return (<>
+        {user &&
+            <Section flexDirection='column' margin='10en 0 0  0' height='100vh'>
+                < SearchProvider >
+                    <SearchBar data={data} />
+                </SearchProvider >
+                <SendEmailsButton />
+            </Section >
+        }
+    </>
     )
 }
 

@@ -6,16 +6,20 @@ import { SizeProp } from '@fortawesome/fontawesome-svg-core';
 import { getBusinesses, useBusinesses } from '../util/db';
 import './BusinessList.scss'
 import DropdownMenu from './Dropdown';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { getAuth } from 'firebase/auth';
 
 function BusinessList(props: {
     sizeProp?: SizeProp | undefined,
-    businesses: any[]
+    businesses: any
 }) {
 
     const [isOpen, setIsOpen] = React.useState(false);
     const { sizeProp, businesses } = props
+    const auth = getAuth()
+    const [user] = useAuthState(auth)
 
-    const { data, isLoading, error } = useBusinesses();
+    const { data, isLoading, error } = useBusinesses(user?.uid);
 
 
     const renderBusinessList = () => {

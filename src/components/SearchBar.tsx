@@ -4,6 +4,7 @@ import SearchFilters from "./SearchFilters";
 import { SearchContext } from "../contexts/SearchContext";
 import { v4 as uuid } from 'uuid';
 import BusinessList from "./BusinessList";
+import SendEmailsButton from "./SendEmailTestButton";
 
 function SearchBar(props: { data?: any[] }) {
     const [query, setQuery] = useState("");
@@ -53,6 +54,7 @@ function SearchBar(props: { data?: any[] }) {
                 placeholder="Search..."
                 className='searchbar-input'
             />
+            <SendEmailsButton />
             {dataAfterFilters && dataAfterFilters.length > 0 && (
                 <BusinessList businesses={dataAfterFilters} />
             )}

@@ -4,6 +4,7 @@ import './Navbar.scss'
 import React from 'react'
 import LoginWithGoogle from './LoginWithGoogle'
 import { useNavigate } from 'react-router-dom';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 const Navbar = () => {
 
@@ -14,8 +15,8 @@ const Navbar = () => {
 
     const auth = getAuth()
     const navigate = useNavigate()
+    const [user, loading, errors] = useAuthState(auth);
 
-    const session = null
 
     return (
         <nav className="navbar">
@@ -25,11 +26,12 @@ const Navbar = () => {
             <div className="navbar-buttons">
                 <button onClick={() => navigate('/')} className="navbar-button">Home</button>
                 <button onClick={() => navigate('/new/business')} className="navbar-button">New business</button>
-                {auth.currentUser
-                    ? <div className='user-icon' style={{ backgroundImage: `url(${auth?.currentUser?.photoURL})` }}>
-                        <DropdownMenu options={['About', 'Settings', 'Profile', 'sign out']} onSelect={() => { console.log('clicked') }}>
-                        </DropdownMenu>
-                    </div>
+                {user
+                    ?
+                    <DropdownMenu options={['About', 'Settings', 'Profile', 'sign out']} onSelect={() => { console.log('clicked') }}>
+                        <div className='user-icon' style={{ backgroundImage: `url(${auth?.currentUser?.photoURL})` }}>
+                        </div>
+                    </DropdownMenu>
                     : <LoginWithGoogle />
                 }
             </div>

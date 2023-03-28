@@ -9,6 +9,7 @@ import Spinner from './Spinner'
 import { useNavigate } from 'react-router'
 import './CreateCustomer.scss'
 import { setBusiness } from '../util/db'
+import { getAuth } from 'firebase/auth'
 
 
 
@@ -27,7 +28,7 @@ function CreateCustomer() {
 
     const { register, handleSubmit, formState: { errors }, reset } = useForm({ resolver: yupResolver(schema) })
 
-
+    const auth = getAuth()
     const navigate = useNavigate()
     const queryClient = useQueryClient()
 
@@ -44,6 +45,7 @@ function CreateCustomer() {
     const onSubmit = (data: any) => {
         const business = {
             ...data, 'businessId': uuidv4().toString().split('-').join(''),
+            userID: auth?.currentUser?.uid
         }
         addBusiness.mutateAsync(business).then((res) => {
         }).catch(err => alert(err));

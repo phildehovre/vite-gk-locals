@@ -1,7 +1,7 @@
 import React from 'react';
-import { useAuthState, useSendEmailVerification } from 'react-firebase-hooks/auth';
-import app, { auth, provider } from '../config/firebase';
-import { Navigate, useNavigate } from 'react-router-dom';
+// import { useAuthState, useSendEmailVerification } from 'react-firebase-hooks/auth';
+import { provider } from '../config/firebase';
+import { useNavigate } from 'react-router-dom';
 import { getAuth, signInWithPopup } from 'firebase/auth';
 
 const Login = () => {
