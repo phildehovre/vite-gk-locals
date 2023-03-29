@@ -4,9 +4,13 @@ import { getAuth, signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { SignOutHook, useSignOut } from 'react-firebase-hooks/auth';
 
+interface Options {
+    value: string;
+    label: string;
+}
+
 interface Props {
-    options: string[];
-    // defaultOption: string;
+    options: Options[];
     onSelect: (option: string) => void;
     children: React.ReactNode
 }
@@ -36,6 +40,7 @@ const DropdownMenu: React.FC<Props> = ({ options,
     const handleOptionClick = (option: string) => {
         setIsOpen(false);
         onSelect(option);
+        navigate(option)
     };
 
     const handleSignOut = () => {
@@ -54,16 +59,20 @@ const DropdownMenu: React.FC<Props> = ({ options,
             {isOpen && (
                 <ul className="dropdown-menu">
                     {options.map((option) => {
-                        if (option === 'Sign out') {
+                        if (option.value === '/signout') {
                             return (
-                                <li key='sign out' onClick={() => handleSignOut()}>
-                                    Sign out
+                                <li key={option.value} onClick={() => handleSignOut()}>
+                                    {option.label}
                                 </li>
                             )
                         }
                         return (
-                            < li key={option} className={`dropdown-option ${option === 'Delete' ? 'delete' : ''} `} onClick={() => handleOptionClick(option)}>
-                                {option}
+                            < li
+                                key={option.value}
+                                className={`dropdown-option ${option.value === 'delete' ? 'delete' : ''} `}
+                                onClick={() => handleOptionClick(option.value)}
+                            >
+                                {option.label}
                             </li>
                         )
                     })}

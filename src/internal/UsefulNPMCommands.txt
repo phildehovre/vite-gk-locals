@@ -1,3 +1,22 @@
 Pre Firebase Deployment ESLing formatter:
 
  npx eslint . --fix
+
+
+                         { label: 'About', value: '/about' },
+                        { label: 'Settings', value: '/settings' },
+                        { label: 'Profile', value: '/profile' },
+                        { label: 'Sign out', value: 'sign out' },
+
+                                                    {
+                                label: 'Home',
+                                value: '/'
+                            },
+                            {
+                                label: 'Businesses',
+                                value: '/new/business'
+                            },
+                            {
+                                label: 'New mail',
+                                value: '/new/mail'
+                            },

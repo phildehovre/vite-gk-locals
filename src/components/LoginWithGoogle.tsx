@@ -3,6 +3,8 @@ import React from 'react';
 import { provider } from '../config/firebase';
 import { useNavigate } from 'react-router-dom';
 import { getAuth, signInWithPopup } from 'firebase/auth';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 
 const Login = () => {
 
@@ -27,7 +29,13 @@ const Login = () => {
 
   return (
     <div>
-      <button onClick={handleSignInWithGoogle}>Sign in with Google</button>
+      <button onClick={handleSignInWithGoogle}>
+        <FontAwesomeIcon icon={faGoogle} />
+        <span style={{ padding: '0 .5em' }}>
+          Sign in with Google
+        </span>
+      </button>
+
     </div>
   );
 };
