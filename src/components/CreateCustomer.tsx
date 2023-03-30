@@ -7,9 +7,11 @@ import { v4 as uuidv4 } from 'uuid'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import Spinner from './Spinner'
 import { useNavigate } from 'react-router'
-import './CreateCustomer.scss'
+// import './CreateCustomer.scss'
 import { setBusiness } from '../util/db'
 import { getAuth } from 'firebase/auth'
+import { Button } from 'react-bootstrap'
+import PageContainer from './PageContainer'
 
 
 
@@ -53,12 +55,13 @@ function CreateCustomer() {
     };
 
     return (
-        <div>
+        <PageContainer>
             <form
                 onSubmit={handleSubmit(onSubmit)}
                 className='form-ctn'>
                 <div className='form-input-ctn'>
-                    <label>First name:
+                    <h4>Create a new customer:</h4>
+                    <label>
                         {errors?.firstName &&
                             <p className='form-error-msg'>Please enter a first name</p>
                         }
@@ -72,7 +75,7 @@ function CreateCustomer() {
                     ></input>
                 </div>
                 <div className='form-input-ctn'>
-                    <label>Last Name:
+                    <label>
                         {errors?.lastName &&
                             <p className='form-error-msg'>Please enter a name</p>
                         }
@@ -86,7 +89,7 @@ function CreateCustomer() {
                     </input>
                 </div>
                 <div className='form-input-ctn'>
-                    <label>E-mail address:
+                    <label>
                         {errors?.email &&
                             <p className='form-error-msg'>Please enter a valid e-mail</p>
                         }
@@ -101,7 +104,7 @@ function CreateCustomer() {
                 </div>
 
                 <div className='form-input-ctn'>
-                    <label>Business name:
+                    <label>
                         {errors?.businessName &&
 
                             <p className='form-error-msg'>Describe the new template</p>
@@ -116,7 +119,7 @@ function CreateCustomer() {
                     ></input>
                 </div>
                 <div className='form-input-ctn'>
-                    <label>Role:
+                    <label>
                         {errors?.role &&
                             <p className='form-error-msg'>Must enter a role</p>
                         }
@@ -130,11 +133,11 @@ function CreateCustomer() {
                     >
                     </input>
                 </div>
-                <button type='submit'>
+                <Button type='submit'>
                     {addBusiness.isLoading ? <Spinner /> : 'Add business'}
-                </button>
+                </Button>
             </form>
-        </div >
+        </PageContainer >
     )
 }
 

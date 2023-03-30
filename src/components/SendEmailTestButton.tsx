@@ -4,7 +4,7 @@ import { FirebaseFunctions } from '@firebase/functions-types';
 import { apiURL } from '../internal/fixedStrings';
 import { getAuth } from 'firebase/auth';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import './SendEmailTestButton.scss'
+// import './SendEmailTestButton.scss'
 // Import the FirebaseFunctions type
 
 

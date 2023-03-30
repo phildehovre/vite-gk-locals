@@ -1,8 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
-import './Dropdown.scss'
+// import './Dropdown.scss'
 import { getAuth, signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { SignOutHook, useSignOut } from 'react-firebase-hooks/auth';
+import Dropdown from 'react-bootstrap/esm/Dropdown';
+import { DropDirection } from 'react-bootstrap/esm/DropdownContext';
 
 interface Options {
     value: string;
@@ -12,30 +14,22 @@ interface Options {
 interface Props {
     options: Options[];
     onSelect: (option: string) => void;
-    children: React.ReactNode
+    children: React.ReactNode,
+    direction: DropDirection | undefined
 }
 
-const DropdownMenu: React.FC<Props> = ({ options,
-    onSelect, children }) => {
+const DropdownMenu: React.FC<Props> = ({
+    options,
+    onSelect, children, direction
+}) => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
-
-    const handleClickOutside = (event: MouseEvent) => {
-        if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-            setIsOpen(false);
-        }
-    };
 
     const auth = getAuth()
     const [signOut, isLoading, error] = useSignOut(auth)
     const navigate = useNavigate()
 
-    useEffect(() => {
-        document.addEventListener('mousedown', handleClickOutside);
-        return () => {
-            document.removeEventListener('mousedown', handleClickOutside);
-        };
-    }, []);
+
 
     const handleOptionClick = (option: string) => {
         setIsOpen(false);
@@ -50,36 +44,32 @@ const DropdownMenu: React.FC<Props> = ({ options,
     }
 
     return (
-        <div className="dropdown" ref={dropdownRef} >
-            <div className="dropdown-toggle"
-                // style={{ backgroundImage: `url(${auth?.currentUser?.photoURL})` }}
-                onClick={() => setIsOpen(!isOpen)}>
+        <Dropdown className="dropdown" ref={dropdownRef} drop={direction}>
+            <Dropdown.Toggle className="dropdown-toggle"
+            >
                 {children}
-            </div>
-            {isOpen && (
-                <ul className="dropdown-menu">
-                    {options.map((option) => {
-                        if (option.value === '/signout') {
-                            return (
-                                <li key={option.value} onClick={() => handleSignOut()}>
-                                    {option.label}
-                                </li>
-                            )
-                        }
+            </Dropdown.Toggle>
+            <Dropdown.Menu className="dropdown-menu">
+                {options.map((option) => {
+                    if (option.value === '/signout') {
                         return (
-                            < li
-                                key={option.value}
-                                className={`dropdown-option ${option.value === 'delete' ? 'delete' : ''} `}
-                                onClick={() => handleOptionClick(option.value)}
-                            >
+                            <Dropdown.Item key={option.value} onClick={() => handleSignOut()}>
                                 {option.label}
-                            </li>
+                            </Dropdown.Item>
                         )
-                    })}
-                </ul>
-            )
-            }
-        </div >
+                    }
+                    return (
+                        < Dropdown.Item
+                            key={option.value}
+                            className={`dropdown-option ${option.value === 'delete' ? 'delete' : ''} `}
+                            onClick={() => handleOptionClick(option.value)}
+                        >
+                            {option.label}
+                        </Dropdown.Item>
+                    )
+                })}
+            </Dropdown.Menu>
+        </Dropdown >
     );
 };
 

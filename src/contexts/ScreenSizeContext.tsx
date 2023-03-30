@@ -2,7 +2,7 @@ import React, { createContext, useEffect, useState } from 'react';
 
 type ScreenSizeContextType = {
     screenSize: number | undefined;
-    setScreenSize: (filter: string | undefined) => void;
+    setScreenSize: (size: number | undefined) => void;
     isSmallScreen: boolean
 };
 
@@ -52,7 +52,7 @@ const ScreenSizeProvider: React.FC<ScreenSizeProviderProps> = ({ children }) => 
 
 
     return (
-        <ScreenSize.Provider value={{ screenSize, isSmallScreen }}>
+        <ScreenSize.Provider value={{ setScreenSize, screenSize, isSmallScreen }}>
             {children}
         </ScreenSize.Provider>
     );

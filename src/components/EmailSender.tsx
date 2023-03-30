@@ -1,4 +1,6 @@
 import React, { SetStateAction, useState } from 'react';
+import { Button } from 'react-bootstrap';
+
 
 function EmailSender(props: { customers: any }) {
     const [response, setResponse] = useState<any>('');
@@ -47,7 +49,7 @@ function EmailSender(props: { customers: any }) {
 
     return (
         <div>
-            <button onClick={() => sendEmail('TEST2', "TEST2")}>Send Email</button>
+            <Button onClick={() => sendEmail('TEST2', "TEST2")}>Send Email</Button>
             {/* {response && <p>Response: {response}</p>} */}
         </div>
     );

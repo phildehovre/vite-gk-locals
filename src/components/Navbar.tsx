@@ -1,6 +1,6 @@
 import { getAuth } from 'firebase/auth';
 import DropdownMenu from './Dropdown';
-import './Navbar.scss'
+// import './Navbar.scss'
 import React, { SetStateAction, useContext, useEffect } from 'react'
 import LoginWithGoogle from './LoginWithGoogle'
 import { useNavigate } from 'react-router-dom';
@@ -8,8 +8,13 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faHamburger, faMarsAndVenus } from '@fortawesome/free-solid-svg-icons';
 import ScreenSizeContext from '../contexts/ScreenSizeContext';
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
 
-const Navbar = () => {
+
+const NavbarWrapper = () => {
 
     const [show, setShow] = React.useState(false)
     const [collapseMenu, setCollapseMenu] = React.useState(false)
@@ -50,14 +55,14 @@ const Navbar = () => {
 
 
     return (
-        <nav className="navbar">
-            <div className="navbar-logo">
-                <h2>GK-Locals</h2>
-            </div>
-            <div className="navbar-buttons collapsed">
+        <Navbar className="navbar">
+            <Container>
+
+                <Navbar.Brand>GkLocals</Navbar.Brand>
+                {/* <div className="navbar-buttons collapsed"> */}
                 {
                     collapseMenu
-                        ? <DropdownMenu options={[
+                        ? <DropdownMenu direction='center' options={[
                             {
                                 label: 'Home',
                                 value: '/'
@@ -75,14 +80,23 @@ const Navbar = () => {
                             <FontAwesomeIcon icon={faBars} size='2x' color='white' />
                         </DropdownMenu>
                         : <>
-                            <button onClick={() => navigate('/')} className="navbar-button">Home</button>
+                            <Nav.Item>
+                                <Nav.Link href="/">Home</Nav.Link>
+                            </Nav.Item>
+                            <Nav.Item>
+                                <Nav.Link href="/new/business">New Business</Nav.Link>
+                            </Nav.Item>
+                            <Nav.Item>
+                                <Nav.Link href="/new/email">New message</Nav.Link>
+                            </Nav.Item>
+                            {/* <button onClick={() => navigate('/')} className="navbar-button">Home</button>
                             <button onClick={() => navigate('/new/business')} className="navbar-button">New business</button>
-                            <button onClick={() => navigate('/new/email')} className="navbar-button">New e-mail</button>
+                            <button onClick={() => navigate('/new/email')} className="navbar-button">New e-mail</button> */}
                         </>
                 }
                 {user
                     &&
-                    <DropdownMenu options={[
+                    <DropdownMenu direction='start' options={[
                         { label: 'About', value: '/about' },
                         { label: 'Settings', value: '/settings' },
                         { label: 'Profile', value: '/profile' },
@@ -93,9 +107,10 @@ const Navbar = () => {
                     </DropdownMenu>
                     // : <LoginWithGoogle />
                 }
-            </div>
-        </nav>
+                {/* </div> */}
+            </Container>
+        </Navbar >
     );
 };
 
-export default Navbar;
+export default NavbarWrapper;

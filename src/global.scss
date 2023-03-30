@@ -1,0 +1,45 @@
+.App {
+    display: flex;
+    flex-direction: column;
+    color: black;
+    min-height: 100vh;
+
+}
+
+.page-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.form-ctn {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+
+    >.form-input-ctn {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: .4em;
+        box-sizing: border-box;
+        border-radius: 6px;
+    }
+}
+
+input {
+    padding: .4em;
+    border-radius: 6px;
+    border: 1px solid lightgrey;
+}
+
+textarea {
+    padding: .4em;
+    border-radius: 6px;
+    border: 1px solid lightgrey;
+
+}

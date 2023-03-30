@@ -1,16 +1,17 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'
-import './index.css'
+// import './index.css'
 import { QueryClientProvider } from './util/db'
 import ScreenSizeProvider from './contexts/ScreenSizeContext'
+import { ThemeProvider } from 'react-bootstrap'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <QueryClientProvider>
-      <ScreenSizeProvider>
+      <ThemeProvider breakpoints={['m']}>
         <App />
-      </ScreenSizeProvider>
+      </ThemeProvider>
     </QueryClientProvider>
-  </React.StrictMode>,
+  </React.StrictMode >,
 )

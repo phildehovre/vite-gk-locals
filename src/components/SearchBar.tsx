@@ -1,5 +1,5 @@
 import React, { SetStateAction, useContext, useEffect, useState } from "react";
-import './SearchBar.scss'
+// import './SearchBar.scss'
 import SearchFilters from "./SearchFilters";
 import { SearchContext } from "../contexts/SearchContext";
 import { v4 as uuid } from 'uuid';
@@ -28,7 +28,6 @@ function SearchBar(props: { data?: any[] }) {
         if (selectedFilter === 'name' && query.length > 0) {
             let firstNames = props.data?.filter((item: any) => regex.test(item.firstName))
             let lastNames = props.data?.filter((item: any) => regex.test(item.lastName))
-            console.log(lastNames, firstNames)
             setDataAfterFilters((prevData: any) => { return [...(firstNames || []), ...(lastNames || [])] })
         }
         if (selectedFilter === 'businessName' && query.length > 0) {

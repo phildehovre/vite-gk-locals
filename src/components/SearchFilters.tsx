@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import './SearchBar.scss'
+// import './SearchBar.scss'
 import { SearchContext } from '../contexts/SearchContext'
 
 function SearchFilters() {

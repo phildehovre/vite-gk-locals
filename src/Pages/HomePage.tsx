@@ -9,6 +9,7 @@ import SearchProvider from '../contexts/SearchContext';
 import { getAuth } from 'firebase/auth';
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { useNavigate } from 'react-router-dom';
+import PageContainer from '../components/PageContainer';
 
 
 function HomePage() {
@@ -27,11 +28,13 @@ function HomePage() {
 
     return (<>
         {user &&
-            <Section flexDirection='column' margin='10en 0 0  0' height='100vh'>
-                < SearchProvider >
-                    <SearchBar data={data} />
-                </SearchProvider >
-            </Section >
+            <PageContainer >
+                <Section flexDirection='column' margin='10en 0 0  0' height='100vh'>
+                    < SearchProvider >
+                        <SearchBar data={data} />
+                    </SearchProvider >
+                </Section >
+            </PageContainer>
         }
     </>
     )

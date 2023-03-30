@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
-import './App.css'
+import './global.scss'
 import LoginWithGoogle from './components/LoginWithGoogle'
 import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom'
 import HomePage from './Pages/HomePage'
@@ -11,6 +11,7 @@ import ComposePage from './Pages/ComposePage'
 import { getAuth } from 'firebase/auth'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import LoginPage from './Pages/LoginPage'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 function App() {
