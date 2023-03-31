@@ -2,10 +2,11 @@ import React, { SetStateAction, useState } from 'react';
 import { Button } from 'react-bootstrap';
 
 
-function EmailSender(props: { customers: any }) {
+function EmailSender(props: { customers: any, content: string, subject: string }) {
     const [response, setResponse] = useState<any>('');
 
-    function sendEmail(content: string, subject: string) {
+    const { subject, content } = props
+    function sendEmail(subject: string, content: string) {
 
         for (let customer of props.customers) {
             const { firstName, lastName, email } = customer;
@@ -49,7 +50,7 @@ function EmailSender(props: { customers: any }) {
 
     return (
         <div>
-            <Button onClick={() => sendEmail('TEST2', "TEST2")}>Send Email</Button>
+            <Button onClick={() => sendEmail(subject, content)}>Send Email</Button>
             {/* {response && <p>Response: {response}</p>} */}
         </div>
     );

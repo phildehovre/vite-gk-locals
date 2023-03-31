@@ -33,6 +33,7 @@ const Login = () => {
     <PageContainer>
       <Button onClick={handleSignInWithGoogle}>
         <FontAwesomeIcon icon={faGoogle} />
+
         <span style={{ padding: '0 .5em' }}>
           Sign in with Google
         </span>

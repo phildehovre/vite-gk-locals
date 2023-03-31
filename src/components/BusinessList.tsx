@@ -12,7 +12,8 @@ import Accordion from 'react-bootstrap/Accordion';
 
 function BusinessList(props: {
     sizeProp?: SizeProp | undefined,
-    businesses: any
+    businesses: any,
+    direction: string | undefined
 }) {
 
     const [isOpen, setIsOpen] = React.useState(false);
@@ -38,7 +39,7 @@ function BusinessList(props: {
                                 <p>{business.businessName}</p>
                                 <p>{business.role}</p>
                                 <div className='business_column small'>
-                                    <DropdownMenu options={[{ label: 'Edit', value: 'edit' }, { label: 'Delete', value: 'delete' }]} onSelect={(e) => console.log(e)}>
+                                    <DropdownMenu direction='start' options={[{ label: 'Edit', value: 'edit' }, { label: 'Delete', value: 'delete' }]} onSelect={(e) => console.log(e)}>
                                         <FontAwesomeIcon icon={faEllipsisVertical} size='lg' onClick={() => setIsOpen(true)} />
                                     </DropdownMenu>
                                 </div>

@@ -12,6 +12,7 @@ import { getAuth } from 'firebase/auth'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import LoginPage from './Pages/LoginPage'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import SearchPage from './Pages/SearchPage'
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
           <Route path="/new/business" element={<CreateCustomer />} />
           <Route path="/new/email" element={<ComposePage />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/search" element={<SearchPage />} />
         </Routes>
       </Router>
     </div>

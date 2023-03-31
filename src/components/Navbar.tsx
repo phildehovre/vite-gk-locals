@@ -62,7 +62,7 @@ const NavbarWrapper = () => {
                 {/* <div className="navbar-buttons collapsed"> */}
                 {
                     collapseMenu
-                        ? <DropdownMenu direction='center' options={[
+                        ? <DropdownMenu direction='down' options={[
                             {
                                 label: 'Home',
                                 value: '/'
