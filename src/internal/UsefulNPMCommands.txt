@@ -1,4 +1,4 @@
-Pre Firebase Deployment ESLing formatter:
+Pre Firebase Deployment ESLint formatter:
 
  npx eslint . --fix
 
