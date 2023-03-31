@@ -5,6 +5,10 @@ import { SearchContext } from "../contexts/SearchContext";
 import { v4 as uuid } from 'uuid';
 import BusinessList from "./BusinessList";
 import SendEmailsButton from "./SendEmailTestButton";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { Button } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 function SearchBar(props: { data?: any[] }) {
     const [query, setQuery] = useState("");
@@ -20,6 +24,8 @@ function SearchBar(props: { data?: any[] }) {
         email: string;
         phone: string;
     }
+
+    const navigate = useNavigate()
 
     useEffect(() => {
         if (query.length === 0) {
@@ -55,8 +61,9 @@ function SearchBar(props: { data?: any[] }) {
                 className='searchbar-input'
             />
             {dataAfterFilters && dataAfterFilters.length > 0 && (
-                <BusinessList businesses={dataAfterFilters} />
+                <BusinessList direction='down' businesses={dataAfterFilters} />
             )}
+            <Button onClick={() => navigate('/new/business')}>Add new <FontAwesomeIcon icon={faPlus} /></Button>
         </div>
     );
 }

@@ -47,9 +47,11 @@ function CreateCustomer() {
     const onSubmit = (data: any) => {
         const business = {
             ...data, 'businessId': uuidv4().toString().split('-').join(''),
-            userID: auth?.currentUser?.uid
+            userID: auth?.currentUser?.uid,
+            createdBy: auth?.currentUser?.uid,
         }
         addBusiness.mutateAsync(business).then((res) => {
+            navigate('/search')
         }).catch(err => alert(err));
         reset()
     };

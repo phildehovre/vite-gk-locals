@@ -23,7 +23,6 @@ function BusinessList(props: {
 
     const { data, isLoading, error } = useBusinesses(user?.uid);
 
-
     const renderBusinessList = () => {
         return (
             <Accordion>
@@ -32,11 +31,15 @@ function BusinessList(props: {
                     businesses?.map((business: any) => (
                         <Accordion.Item eventKey={business.businessId} key={business.businessId} className='business-ctn'>
                             <Accordion.Header className='business_column left'>
-                                <p>{business.lastName} {business.firstName}</p>
-                                <p>{business.email}</p>
+                                <span style={{ width: '100%', display: 'flex', justifyContent: 'space-between', flexDirection: 'row' }}>
+                                    <span>
+                                        <p><b>{business.lastName} {business.firstName}</b></p>
+                                        <p>{business.businessName}</p>
+                                    </span>
+                                    <p>{business.email}</p>
+                                </span>
                             </Accordion.Header>
                             <Accordion.Body className='business_column right'>
-                                <p>{business.businessName}</p>
                                 <p>{business.role}</p>
                                 <div className='business_column small'>
                                     <DropdownMenu direction='start' options={[{ label: 'Edit', value: 'edit' }, { label: 'Delete', value: 'delete' }]} onSelect={(e) => console.log(e)}>

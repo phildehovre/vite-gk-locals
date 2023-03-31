@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { Button } from 'react-bootstrap';
 import PageContainer from './PageContainer';
+import { faMailBulk } from '@fortawesome/free-solid-svg-icons';
 
 const Login = () => {
 
@@ -32,7 +33,7 @@ const Login = () => {
   return (
     <PageContainer>
       <Button onClick={handleSignInWithGoogle}>
-        <FontAwesomeIcon icon={faGoogle} />
+        <FontAwesomeIcon icon={faMailBulk} />
 
         <span style={{ padding: '0 .5em' }}>
           Sign in with Google
