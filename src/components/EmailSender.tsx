@@ -1,13 +1,17 @@
+import { faCircleCheck } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { SetStateAction, useState } from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Spinner } from 'react-bootstrap';
 
 
-function EmailSender(props: { customers: any, content: string, subject: string }) {
+function EmailSender(props: { customers: any, content: string, subject: string, onSend: () => void }) {
     const [response, setResponse] = useState<any>('');
+    const [isLoading, setIsLoading] = useState<boolean>(false);
 
-    const { subject, content } = props
+    const { subject, content, onSend } = props
+
     function sendEmail(subject: string, content: string) {
-
+        setIsLoading(true)
         for (let customer of props.customers) {
             const { firstName, lastName, email } = customer;
             try {
@@ -40,18 +44,23 @@ function EmailSender(props: { customers: any, content: string, subject: string }
                         "subject": subject,
                     })
                 })
-                    .then(response => setResponse(response))
+                    .then(response => {
+                        setIsLoading(false)
+                        onSend()
+                        setResponse(response)
+                    })
                     .catch(error => console.error(error));
             } catch (err) {
                 console.log(err)
             }
         }
     }
-
+    console.log(response)
     return (
         <div>
-            <Button onClick={() => sendEmail(subject, content)}>Send Email</Button>
-            {/* {response && <p>Response: {response}</p>} */}
+            <Button onClick={() => sendEmail(subject, content)}>
+                {isLoading ? <Spinner /> : 'Send Emails'}
+            </Button>
         </div>
     );
 }

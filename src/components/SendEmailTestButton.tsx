@@ -4,6 +4,7 @@ import { FirebaseFunctions } from '@firebase/functions-types';
 import { apiURL } from '../internal/fixedStrings';
 import { getAuth } from 'firebase/auth';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { Spinner } from 'react-bootstrap';
 // import './SendEmailTestButton.scss'
 // Import the FirebaseFunctions type
 
@@ -11,6 +12,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 const SendEmailsButton = () => {
     const auth = getAuth()
     const [user] = useAuthState(auth);
+    const [isLoading, setIsLoading] = useState(false)
 
     const handleSendEmail = () => {
         sendTransactionalMailAccepted('ph.dehovre@gmail.com', user?.email, 'test', 'test')
@@ -24,6 +26,8 @@ const SendEmailsButton = () => {
         mailTitle: string,
         mailBody: string
     ) => {
+
+        setIsLoading(true)
 
         var templateParams = {
             recipientMail: recipientMail,
@@ -45,19 +49,20 @@ const SendEmailsButton = () => {
         };
 
         fetch(apiURL + "/api/sendMail", requestOptions).then((response) => {
+            setIsLoading(false)
             return response.json()
         })
     }
+
+    console.log(isLoading)
 
     return (<>
         <button
             onClick={handleSendEmail}
             className='send-btn'
         >
-            {/* {isLoading ? 'Sending Emails...' : 'Send Emails'} */}
-            Send
+            {isLoading ? <Spinner /> : 'Send Emails'}
         </button >
-        <div className='send-btn'></div>
     </>
     );
 };
