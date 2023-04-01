@@ -9,11 +9,11 @@ function PageContainer(props: { children: React.ReactNode }) {
     const [user] = useAuthState(auth)
     const navigate = useNavigate()
 
-    useEffect(() => {
-        if (!user) {
-            navigate('/login')
-        }
-    }, [])
+    // useEffect(() => {
+    //     if (!user) {
+    //         navigate('/login')
+    //     }
+    // }, [])
 
     const { children } = props
     return (
