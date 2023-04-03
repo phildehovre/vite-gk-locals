@@ -81,13 +81,13 @@ const NavbarWrapper = () => {
                         </DropdownMenu>
                         : <>
                             <Nav.Item>
-                                <Nav.Link href="/">Home</Nav.Link>
+                                <Nav.Link onClick={() => navigate("/")}>Home</Nav.Link>
                             </Nav.Item>
                             <Nav.Item>
-                                <Nav.Link href="/new/business">New Business</Nav.Link>
+                                <Nav.Link onClick={() => navigate("/new/business")}>New Business</Nav.Link>
                             </Nav.Item>
                             <Nav.Item>
-                                <Nav.Link href="/new/email">New message</Nav.Link>
+                                <Nav.Link onClick={() => navigate("/new/email")}>New message</Nav.Link>
                             </Nav.Item>
                             {/* <button onClick={() => navigate('/')} className="navbar-button">Home</button>
                             <button onClick={() => navigate('/new/business')} className="navbar-button">New business</button>
