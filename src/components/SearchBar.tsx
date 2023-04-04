@@ -48,7 +48,6 @@ function SearchBar(props: { data?: any[] }) {
     }, [query, selectedFilter])
 
 
-
     return (
         <div className='searchbar-ctn'
             style={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', gap: '1em' }}>

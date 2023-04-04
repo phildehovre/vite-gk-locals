@@ -13,6 +13,7 @@ import { useAuthState } from 'react-firebase-hooks/auth'
 import LoginPage from './Pages/LoginPage'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import SearchPage from './Pages/SearchPage'
+import NavbarGPT from './components/NavBarGPT'
 
 
 function App() {
@@ -21,7 +22,8 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <Navbar />
+        {/* <Navbar /> */}
+        <NavbarGPT />
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/new/business" element={<CreateCustomer />} />

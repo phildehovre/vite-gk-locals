@@ -21,6 +21,7 @@ const schema = yup.object().shape({
     email: yup.string().email().required('A last name is required'),
     businessName: yup.string().required('A business name is required'),
     role: yup.string().required('A role is required'),
+    phone: yup.string().required('A phone number is required'),
 })
 
 // 'id': uuidv4().toString().split('-').join('')
@@ -104,7 +105,21 @@ function CreateCustomer() {
                         className='form-input'>
                     </input>
                 </div>
-
+                <div className='form-input-ctn'>
+                    <label>
+                        {errors?.phone &&
+                            <p className='form-error-msg'>Must enter a phone number</p>
+                        }
+                    </label>
+                    <input
+                        {...register('phone')}
+                        name='phone'
+                        className='form-input'
+                        type='text'
+                        placeholder='Phone number'
+                    >
+                    </input>
+                </div>
                 <div className='form-input-ctn'>
                     <label>
                         {errors?.businessName &&
@@ -135,6 +150,7 @@ function CreateCustomer() {
                     >
                     </input>
                 </div>
+
                 <Button type='submit'>
                     {addBusiness.isLoading ? <Spinner /> : 'Add business'}
                 </Button>

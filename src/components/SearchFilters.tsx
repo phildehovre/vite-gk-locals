@@ -8,14 +8,19 @@ function SearchFilters() {
     const { selectedFilter, setSelectedFilter } = useContext(SearchContext)
     const [buttonValue, setButtonValue] = useState('name')
 
+
+
     const handleFilterClick = (filterName: string) => {
         setSelectedFilter(filterName)
     }
+
+    console.log(selectedFilter)
 
     const buttons = [
         { label: 'Name', value: 'name' },
         { label: 'Business name', value: 'businessName' },
         { label: 'E-mail', value: 'email' },
+        { label: 'Phone Number', value: 'phone' },
     ]
 
     return (
@@ -29,8 +34,8 @@ function SearchFilters() {
                         variant="outline-primary"
                         name="radio"
                         value={button.value}
-                        checked={buttonValue === button.value}
-                        onChange={(e) => setButtonValue(e.currentTarget.value)}
+                        checked={selectedFilter === button.value}
+                        onChange={(e) => handleFilterClick(e.currentTarget.value)}
                     >{button.label}</ToggleButton>
                 )
             }

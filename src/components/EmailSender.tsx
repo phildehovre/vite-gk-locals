@@ -1,12 +1,14 @@
-import { faCircleCheck } from '@fortawesome/free-solid-svg-icons';
+import { faCheckCircle, faCircleCheck, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { SetStateAction, useState } from 'react';
 import { Button, Spinner } from 'react-bootstrap';
+import Modal from './Modal';
 
 
 function EmailSender(props: { customers: any, content: string, subject: string, onSend: () => void }) {
     const [response, setResponse] = useState<any>('');
     const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [showModal, setShowModal] = useState<boolean>(false);
 
     const { subject, content, onSend } = props
 
@@ -59,12 +61,27 @@ function EmailSender(props: { customers: any, content: string, subject: string, 
             }
         }
     }
-    console.log(response)
+
+
+    const handleModalConfirmSend = () => {
+        sendEmail(subject, content)
+        setShowModal(false)
+    }
     return (
         <div>
-            <Button onClick={() => sendEmail(subject, content)}>
+            <Button onClick={() => setShowModal(true)}>
                 {isLoading ? <Spinner /> : 'Send Emails'}
             </Button>
+            <Modal
+                title="Confirm Action"
+                message="Are you sure you want to perform this action?"
+                confirmIcon={faCheckCircle}
+                cancelIcon={faTimesCircle}
+                onConfirm={handleModalConfirmSend}
+                onCancel={() => setShowModal(false)}
+                show={showModal}
+                onHide={() => setShowModal(false)}
+            />
         </div>
     );
 }

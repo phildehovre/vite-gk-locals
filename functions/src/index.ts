@@ -2,10 +2,10 @@ import * as functions from "firebase-functions";
 import * as admin from "firebase-admin";
 import * as express from "express";
 import * as SibApiV3Sdk from "sib-api-v3-sdk";
-import {config} from "dotenv";
+import { config } from "dotenv";
 import * as cors from "cors";
-import {getAuth} from "firebase-admin/auth";
-import {getDatabase} from "firebase-admin/database";
+import { getAuth } from "firebase-admin/auth";
+import { getDatabase } from "firebase-admin/database";
 
 config();
 
@@ -18,9 +18,9 @@ exports.processSignUp = functions.auth.user().onCreate(async (user) => {
   // Check if user meets role criteria.
   if (
     user.email &&
-        process.env.VITE_REACT_APP_ADMIN_ARRAY &&
-        process.env.VITE_REACT_APP_ADMIN_ARRAY.includes(user.email) &&
-        user.emailVerified
+    process.env.VITE_REACT_APP_ADMIN_ARRAY &&
+    process.env.VITE_REACT_APP_ADMIN_ARRAY.includes(user.email) &&
+    user.emailVerified
   ) {
     const customClaims = {
       admin: true,
@@ -36,8 +36,8 @@ exports.processSignUp = functions.auth.user().onCreate(async (user) => {
       const metadataRef = getDatabase().ref("metadata").child(user.uid);
       const refreshTime = new Date().getTime();
 
-      await metadataRef.set({refreshTime});
-      console.log(`Metadata for ${user.uid} updated:`, {refreshTime});
+      await metadataRef.set({ refreshTime });
+      console.log(`Metadata for ${user.uid} updated:`, { refreshTime });
     } catch (error) {
       console.log(`Error with sign up for user ${user.uid}:`, error);
     }
@@ -52,32 +52,32 @@ const sendinblue = (sendSmtpEmail: any) => {
   const transactionnalApiInstance = new SibApiV3Sdk.TransactionalEmailsApi();
 
   transactionnalApiInstance.sendTransacEmail(sendSmtpEmail).then(
-    function(data: any) {
+    function (data: any) {
       console.log(data);
       return true;
     },
-    function(error: any) {
+    function (error: any) {
       console.log(error);
       return false;
     }
   );
 };
 
-app.use(cors({origin: true}));
+app.use(cors({ origin: true }));
 
 app.post("/sendMail", async (req, res) => {
   const sendSmtpEmail = {
-    to: [{email: req.body.recipientMail}],
+    to: [{ email: req.body.recipientMail }],
     templateId: req.body.templateId,
     params: req.body.templateParams,
   };
   sendinblue(sendSmtpEmail);
 
-  res.status(200).send({mailSent: "success"});
+  res.status(200).send({ mailSent: "success" });
 });
 
 app.get("/helloWorld", (request, response) => {
-  functions.logger.info("Hello logs!", {structuredData: true});
+  functions.logger.info("Hello logs!", { structuredData: true });
   response.send("Hello from Firebase!");
 });
 
