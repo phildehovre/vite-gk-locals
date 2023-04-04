@@ -29,7 +29,11 @@ function EmailSender(props: { customers: any, content: string, subject: string, 
                             "name": "Phil De Hovre",
                             "email": "info@thegrovew5.co.uk"
                         },
-                        "to": [
+                        "to": [{
+                            "email": "placeholder@email.com",
+                            "name": "Phil De Hovre"
+                        }],
+                        "bcc": [
                             {
                                 "email": email,
                                 "name": `${firstName} ${lastName}`
