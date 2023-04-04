@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faHome, faEnvelope, faUsers, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
-import './NavbarGPT.scss';
-import { useSignOut } from 'react-firebase-hooks/auth';
+import './NavBarGPT.scss'
+import { useAuthState, useSignOut } from 'react-firebase-hooks/auth';
 import { getAuth } from 'firebase/auth';
 
 const NavbarGPT: React.FC = () => {
@@ -16,7 +16,10 @@ const NavbarGPT: React.FC = () => {
     const navigate = useNavigate()
 
     const auth = getAuth()
+    const [user, loading] = useAuthState(auth)
     const [signOut, isLoading, error] = useSignOut(auth)
+
+    console.log(user ? true : false)
 
     const handleSignOut = () => {
         signOut()
@@ -44,7 +47,7 @@ const NavbarGPT: React.FC = () => {
                     <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li className="nav-item">
                             <Link
-                                className="nav-link"
+                                className={`nav-link ${!user ? '' : 'disabled'}`}
                                 to="/"
                                 onClick={() => setIsOpen(false)}
                             >
@@ -54,7 +57,7 @@ const NavbarGPT: React.FC = () => {
                         </li>
                         <li className="nav-item">
                             <Link
-                                className="nav-link"
+                                className={`nav-link ${!user ? '' : 'disabled'}`}
                                 to="/new/business"
                                 onClick={() => setIsOpen(false)}
                             >
@@ -64,7 +67,7 @@ const NavbarGPT: React.FC = () => {
                         </li>
                         <li className="nav-item">
                             <Link
-                                className="nav-link"
+                                className={`nav-link ${!user ? '' : 'disabled'}`}
                                 to="/new/email"
                                 onClick={() => setIsOpen(false)}
                             >

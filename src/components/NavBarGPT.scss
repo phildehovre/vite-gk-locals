@@ -66,8 +66,15 @@
                 color: #007bff;
                 border-bottom: 2px solid #007bff;
             }
+
         }
     }
+}
+
+.disabled {
+    color: rgb(172, 172, 172) !important;
+    cursor: not-allowed !important;
+    pointer-events: none !important;
 }
 
 @media (max-width: 991.98px) {
