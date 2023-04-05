@@ -14,7 +14,6 @@ function SearchFilters() {
         setSelectedFilter(filterName)
     }
 
-    console.log(selectedFilter)
 
     const buttons = [
         { label: 'Name', value: 'name' },

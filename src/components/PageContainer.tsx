@@ -1,19 +1,25 @@
 import { getAuth } from 'firebase/auth'
 import React, { useEffect } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 function PageContainer(props: { children: React.ReactNode }) {
 
     const auth = getAuth()
-    const [user] = useAuthState(auth)
+
+
+    const [user] = useAuthState(getAuth())
+    const location = useLocation();
     const navigate = useNavigate()
+
+    // console.log(location)
 
     // useEffect(() => {
     //     if (!user) {
-    //         navigate('/login')
+    //         navigate("/login")
+
     //     }
-    // }, [])
+    // }, [location])
 
     const { children } = props
     return (

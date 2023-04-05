@@ -8,7 +8,7 @@ import SearchBar from '../components/SearchBar';
 import SearchProvider from '../contexts/SearchContext';
 import { getAuth } from 'firebase/auth';
 import { useAuthState } from 'react-firebase-hooks/auth'
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import PageContainer from '../components/PageContainer';
 
 
@@ -21,10 +21,16 @@ function HomePage() {
 
     const { data, isLoading, error } = useBusinesses(auth.currentUser?.uid);
 
+    const location = useLocation();
+
+    console.log(location)
 
     useEffect(() => {
-        if (!user) navigate("/login")
-    })
+        if (!user) {
+            navigate("/login")
+
+        }
+    }, [location])
 
     return (<>
         {user &&

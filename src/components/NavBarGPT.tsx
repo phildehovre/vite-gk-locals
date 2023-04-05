@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faHome, faEnvelope, faUsers, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
@@ -8,6 +8,7 @@ import { getAuth } from 'firebase/auth';
 
 const NavbarGPT: React.FC = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const [linksAreEnabled, setLinksAreEnabled] = useState(true);
 
     const toggleNav = () => {
         setIsOpen(!isOpen);
@@ -19,7 +20,14 @@ const NavbarGPT: React.FC = () => {
     const [user, loading] = useAuthState(auth)
     const [signOut, isLoading, error] = useSignOut(auth)
 
-    console.log(user ? true : false)
+    useEffect(() => {
+        if (!user) {
+            setLinksAreEnabled(true)
+        } else {
+            setLinksAreEnabled(false)
+        }
+    }, [user])
+
 
     const handleSignOut = () => {
         signOut()
@@ -47,7 +55,8 @@ const NavbarGPT: React.FC = () => {
                     <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li className="nav-item">
                             <Link
-                                className={`nav-link ${!user ? '' : 'disabled'}`}
+                                className={`nav-link ${!linksAreEnabled ? '' : 'disabled'}`}
+                                aria-disabled={true}
                                 to="/"
                                 onClick={() => setIsOpen(false)}
                             >
@@ -57,7 +66,7 @@ const NavbarGPT: React.FC = () => {
                         </li>
                         <li className="nav-item">
                             <Link
-                                className={`nav-link ${!user ? '' : 'disabled'}`}
+                                className={`nav-link ${!linksAreEnabled ? '' : 'disabled'}`}
                                 to="/new/business"
                                 onClick={() => setIsOpen(false)}
                             >
@@ -67,7 +76,7 @@ const NavbarGPT: React.FC = () => {
                         </li>
                         <li className="nav-item">
                             <Link
-                                className={`nav-link ${!user ? '' : 'disabled'}`}
+                                className={`nav-link ${!linksAreEnabled ? '' : 'disabled'}`}
                                 to="/new/email"
                                 onClick={() => setIsOpen(false)}
                             >
