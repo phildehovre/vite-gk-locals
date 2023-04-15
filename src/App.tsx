@@ -26,15 +26,15 @@ function App() {
     <div className="App">
       <Router>
         <NavbarGPT />
-        <LoginChecker>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/new/business" element={<CreateCustomer />} />
-            <Route path="/new/email" element={<ComposePage />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/search" element={<SearchPage />} />
-          </Routes>
-        </LoginChecker>
+        {/* <LoginChecker> */}
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/new/business" element={<CreateCustomer />} />
+          <Route path="/new/email" element={<ComposePage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/search" element={<SearchPage />} />
+        </Routes>
+        {/* </LoginChecker> */}
       </Router>
     </div >
   )
