@@ -12,14 +12,7 @@ function PageContainer(props: { children: React.ReactNode }) {
     const location = useLocation();
     const navigate = useNavigate()
 
-    // console.log(location)
 
-    // useEffect(() => {
-    //     if (!user) {
-    //         navigate("/login")
-
-    //     }
-    // }, [location])
 
     const { children } = props
     return (

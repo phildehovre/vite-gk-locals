@@ -42,7 +42,7 @@ function ComposeEmail() {
                 <label className='compose-label'>
                 </label>
                 <textarea id="email-content" name="content" placeholder='Content...' className='compose-input content'
-                    rows={15} cols={35}
+                    rows={15} cols={25}
                     onChange={(e) => { setEmailContent(e.target.value) }}
                     value={emailContent}
                 >

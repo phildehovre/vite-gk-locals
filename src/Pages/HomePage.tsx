@@ -17,20 +17,9 @@ function HomePage() {
     const auth = getAuth()
 
     const [user, loading, errors] = useAuthState(auth);
-    const navigate = useNavigate()
-
+    
     const { data, isLoading, error } = useBusinesses(auth.currentUser?.uid);
-
-    const location = useLocation();
-
-    console.log(location)
-
-    useEffect(() => {
-        if (!user) {
-            navigate("/login")
-
-        }
-    }, [location])
+   
 
     return (<>
         {user &&
